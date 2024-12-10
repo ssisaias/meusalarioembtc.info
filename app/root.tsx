@@ -28,9 +28,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script defer src="http://localhost:3000/script.js" data-website-id="dd5ff606-d4a6-4ca0-be30-3ac600a800d0"></script>
         <Meta />
         <Links />
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-9715609143171289"
+        ></meta>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9715609143171289"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body>
         {children}
