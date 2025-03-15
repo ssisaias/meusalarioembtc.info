@@ -1,5 +1,6 @@
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
@@ -46,7 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         ></script>
       </head>
       <body>
-      <ThemeProvider attribute="class">{children}</ThemeProvider>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
