@@ -61,7 +61,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
           <div className="space-y-4">
             <h2 className="text-4xl font-bold">Meu salário em BTC:</h2>
             <p
-              className={`text-5xl font-bold text-center overflow-hidden ${
+              className={`text-5xl font-bold text-center overflow-hidden text-ellipsis ${
                 theme.resolvedTheme === 'dark' ? 'text-yellow-400' : ''
               }`}
             >
