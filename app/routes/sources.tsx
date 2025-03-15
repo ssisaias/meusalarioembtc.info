@@ -24,7 +24,7 @@ const citations: citation[] = [
 export default function Page() {
   const { data } = useLoaderData<typeof loader>();
   return (
-    <div className="min-h-screen bg-white p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto space-y-4">
         <section className="space-y-4">
           <h1 className="text-3xl font-bold pb-2">Rationale + Fontes</h1>

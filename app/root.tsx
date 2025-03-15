@@ -11,6 +11,7 @@ import type { LinksFunction } from 'react-router'
 import './app.css'
 import { ShadowOuterIcon } from '@radix-ui/react-icons'
 import type { Route } from './+types/root'
+import { ThemeProvider } from './components/theme-provider'
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -45,7 +46,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         ></script>
       </head>
       <body>
-        {children}
+      <ThemeProvider attribute="class">{children}</ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -55,7 +56,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export function HydrateFallback() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-black">
+    <div className="absolute inset-0 flex items-center justify-center">
       <ShadowOuterIcon className="h-24 w-24 text-primary animate-ping duration-1000 transition-discrete"></ShadowOuterIcon>
       <span className="sr-only">Loading...</span>
     </div>

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Link } from "react-router";
 import { getScrapedData } from "@/db/interface";
 import type { Route } from "./+types/_index";
+import { ThemeSwitch } from "~/components/theme-switch";
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,7 +32,10 @@ export default function Index({ loaderData }: Route.ComponentProps) {
   const dollarValue = Number(salary) * (data?.rate ?? 5.6); // Simple fixed conversion for demo
 
   return (
-    <div className="max-h-screen bg-white p-8">
+    <div className="max-h-screen p-8">
+      <div className="fixed bottom-2 right-2">
+        <ThemeSwitch />
+      </div>
       <div className="max-w-4xl mx-auto space-y-4">
         {/* Header Section */}
         <section className="text-center space-y-4 mb-2">
