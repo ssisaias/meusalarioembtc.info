@@ -1,19 +1,18 @@
 import SourceCitation from "@/components/citations";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { Link, useLoaderData } from "@remix-run/react";
-import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "react-router";
 import { getScrapedData } from "@/db/interface";
+import type { Route } from "./+types/sources";
 
 interface citation {
   citation: string;
   url: string;
 }
 
-export const loader = async () => {
-  return json({
-    data: await getScrapedData(),
-  });
-};
+export async function loader({ params }: Route.LoaderArgs) {
+  const data = await getScrapedData();
+  return { data };
+}
 
 const citations: citation[] = [
   {
@@ -25,7 +24,7 @@ const citations: citation[] = [
 export default function Page() {
   const { data } = useLoaderData<typeof loader>();
   return (
-    <div className="min-h-screen bg-white p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto space-y-4">
         <section className="space-y-4">
           <h1 className="text-3xl font-bold pb-2">Rationale + Fontes</h1>
