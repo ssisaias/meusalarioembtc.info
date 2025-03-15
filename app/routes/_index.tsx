@@ -1,10 +1,10 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "react-router";
 import { useState } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Link, useLoaderData } from "@remix-run/react";
-import { json } from "@remix-run/node";
+import { Link } from "react-router";
 import { getScrapedData } from "@/db/interface";
+import type { Route } from "./+types/_index";
 
 export const meta: MetaFunction = () => {
   return [
@@ -21,14 +21,12 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = async () => {
-  return json({
-    data: await getScrapedData(),
-  });
-};
+export async function loader({ params }: Route.LoaderArgs) {
+  return await getScrapedData();
+}
 
-export default function Index() {
-  const { data } = useLoaderData<typeof loader>();
+export default function Index({ loaderData }: Route.ComponentProps) {
+  const data = loaderData;
   const [salary, setSalary] = useState("1412");
   const dollarValue = Number(salary) * (data?.rate ?? 5.6); // Simple fixed conversion for demo
 
@@ -48,7 +46,7 @@ export default function Index() {
             onChange={(e) => setSalary(e.target.value)}
             placeholder="Digite seu salário em reais aqui"
             className={` webkit-appearance-none -moz-appearance-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
-                text-4xl text-center w-full h-12 bg-gray-100 focus-visible:ring-1 focus-visible:ring-yellow-400`}
+                text-4xl text-center w-full h-12 bg-gray focus-visible:ring-1 focus-visible:ring-yellow-400`}
             // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
           />

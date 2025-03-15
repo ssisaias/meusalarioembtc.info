@@ -1,19 +1,18 @@
 import SourceCitation from "@/components/citations";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { Link, useLoaderData } from "@remix-run/react";
-import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "react-router";
 import { getScrapedData } from "@/db/interface";
+import type { Route } from "./+types/sources";
 
 interface citation {
   citation: string;
   url: string;
 }
 
-export const loader = async () => {
-  return json({
-    data: await getScrapedData(),
-  });
-};
+export async function loader({ params }: Route.LoaderArgs) {
+  const data = await getScrapedData();
+  return { data };
+}
 
 const citations: citation[] = [
   {

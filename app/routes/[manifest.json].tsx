@@ -1,5 +1,5 @@
 import type { WebAppManifest } from '@remix-pwa/dev';
-import { json } from '@remix-run/node';
+import { json } from 'react-router';
 
 export const loader = () => {
   return json(
