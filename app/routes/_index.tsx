@@ -1,35 +1,37 @@
-import type { MetaFunction } from "react-router";
-import { useState } from "react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Link } from "react-router";
-import { getScrapedData } from "@/db/interface";
-import type { Route } from "./+types/_index";
-import { ThemeSwitch } from "~/components/theme-switch";
+import type { MetaFunction } from 'react-router'
+import { useState } from 'react'
+import { Card, CardHeader, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Link } from 'react-router'
+import { getScrapedData } from '@/db/interface'
+import type { Route } from './+types/_index'
+import { ThemeSwitch } from '~/components/theme-switch'
+import { useTheme } from 'next-themes'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Meu Salário em BTC" },
-    { name: "Descubra quanto vale seu salário em btc" },
+    { title: 'Meu Salário em BTC' },
+    { name: 'Descubra quanto vale seu salário em btc' },
     {
-      name: "keywords",
-      content: "salário, btc, conversão, brasil, estados unidos",
+      name: 'keywords',
+      content: 'salário, btc, conversão, brasil, estados unidos',
     },
     {
-      name: "description",
-      content: "Descubra quanto vale seu salário em btc",
+      name: 'description',
+      content: 'Descubra quanto vale seu salário em btc',
     },
-  ];
-};
+  ]
+}
 
 export async function loader({ params }: Route.LoaderArgs) {
-  return await getScrapedData();
+  return await getScrapedData()
 }
 
 export default function Index({ loaderData }: Route.ComponentProps) {
-  const data = loaderData;
-  const [salary, setSalary] = useState("1412");
-  const dollarValue = Number(salary) * (data?.rate ?? 5.6); // Simple fixed conversion for demo
+  const data = loaderData
+  const [salary, setSalary] = useState('1518')
+  const dollarValue = Number(salary) * (data?.rate ?? 5.6) // Simple fixed conversion for demo
+  const theme = useTheme()
 
   return (
     <div className="max-h-screen p-8">
@@ -45,12 +47,12 @@ export default function Index({ loaderData }: Route.ComponentProps) {
           <Input
             type="number"
             value={salary}
-            max={999999999999999}
+            max={9999999999999}
             maxLength={15}
             onChange={(e) => setSalary(e.target.value)}
             placeholder="Digite seu salário em reais aqui"
-            className={` webkit-appearance-none -moz-appearance-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
-                text-4xl text-center w-full h-12 bg-gray focus-visible:ring-1 focus-visible:ring-yellow-400`}
+            className={`webkit-appearance-none -moz-appearance-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+                text-4xl text-center w-full h-12 bg-gray focus-visible:ring-1 focus-visible:ring-yellow-400 border-1 focus-visible:bg-input-bg`}
             // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
           />
@@ -58,7 +60,11 @@ export default function Index({ loaderData }: Route.ComponentProps) {
           {/* Dollar Conversion */}
           <div className="space-y-4">
             <h2 className="text-4xl font-bold">Meu salário em BTC:</h2>
-            <p className="text-5xl font-bold">
+            <p
+              className={`text-5xl font-bold text-center overflow-hidden ${
+                theme.resolvedTheme === 'dark' ? 'text-yellow-400' : ''
+              }`}
+            >
               {new Intl.NumberFormat(undefined, {
                 minimumFractionDigits: 15,
               }).format(dollarValue)}
@@ -144,5 +150,5 @@ export default function Index({ loaderData }: Route.ComponentProps) {
         </nav>
       </div>
     </div>
-  );
+  )
 }

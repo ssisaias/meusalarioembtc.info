@@ -52,6 +52,7 @@ body {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --input-bg: oklch(93.86% 0.002 80.47)
 }
 
 .dark {
@@ -87,6 +88,7 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  --input-bg: oklch(49.71% 0.002 80.47)
 }
 
 @theme inline {
@@ -100,6 +102,7 @@ body {
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-input-bg: var(--input-bg);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
