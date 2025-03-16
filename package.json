@@ -1,13 +1,14 @@
 {
   "name": "meusalarioembtc",
-  "version": "1.1.1",
+  "version": "1.1.3",
   "private": true,
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "build:local": "react-router build",
     "build": "react-router build",
-    "dev": "cross-env NODE_ENV=development node ./dev-server.js",
-    "start": "netlify serve",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "@radix-ui/react-icons": "^1.3.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@react-router/node": "^7.3.0",
+    "@react-router/serve": "^7.3.0",
     "better-sqlite3": "^11.7.0",
     "cheerio": "^1.0.0",
     "class-variance-authority": "^0.7.1",
