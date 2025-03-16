@@ -1,5 +1,5 @@
 import type { MetaFunction } from 'react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Link } from 'react-router'
@@ -31,8 +31,21 @@ export default function Index({ loaderData }: Route.ComponentProps) {
   const data = loaderData
   const [salary, setSalary] = useState('1518')
   const dollarValue = Number(salary) * (data?.rate ?? 5.6) // Simple fixed conversion for demo
+  const [currentTheme, setCurrentTheme] = useState<string | undefined | null>(
+    undefined,
+  )
   const theme = useTheme()
-
+  useEffect(() => {
+    if (theme.theme) {
+      if (theme.theme === 'system' && theme.systemTheme === 'dark') {
+        setCurrentTheme('dark')
+      } else {
+        setCurrentTheme(theme.theme)
+      }
+    } else {
+      setCurrentTheme(localStorage.getItem('theme'))
+    }
+  }, [theme.theme])
   return (
     <div className="max-h-screen p-8">
       <div className="fixed bottom-2 left-2">
@@ -80,7 +93,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
             <h2 className="text-4xl font-bold">Meu salário em BTC:</h2>
             <p
               className={`text-5xl font-bold text-center overflow-hidden text-ellipsis ${
-                theme.resolvedTheme === 'dark' ? 'text-yellow-400' : ''
+                currentTheme === 'dark' ? 'text-yellow-400' : ''
               }`}
             >
               {new Intl.NumberFormat(undefined, {
