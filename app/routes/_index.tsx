@@ -7,6 +7,7 @@ import { getScrapedData } from '@/db/interface'
 import type { Route } from './+types/_index'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { useTheme } from 'next-themes'
+import { AdsBanner } from '~/components/ads-banner'
 
 export const meta: MetaFunction = () => {
   return [
@@ -138,12 +139,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
 
             {/* Card 3 */}
             <Card className="bg-transparent border-transparent text-yellow-400 hover:border-solid hover:border-yellow-400">
-              <CardHeader>
-                <h3 className="text-xl font-bold">Anuncie aqui:</h3>
-              </CardHeader>
-              <CardContent>
-                <p className="italic">Em breve...</p>
-              </CardContent>
+              <AdsBanner />
             </Card>
           </div>
         </section>
