@@ -62,6 +62,8 @@ export async function getScrapedData(): Promise<ConversionRate | null> {
       creationDate: new Date().toISOString(),
       id: latest.id + 1,
     };
+    console.log(latest);
+    
   }
   return {
     source:
@@ -78,6 +80,7 @@ export async function fetchLatest(): Promise<string> {
   const pageContent = await webPage.text();
   const $ = cheerio.load(pageContent);
   const content = $('[data-testid="conversion"]').text();
+  console.log(content);
   insertScrapedData(content);
   return content;
 }
