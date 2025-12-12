@@ -17,12 +17,15 @@ type Pages = {
   "/sources": {
     params: {};
   };
+  "/manifest.json": {
+    params: {};
+  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/sources";
+    page: "/" | "/sources" | "/manifest.json";
   };
   "routes/_index.tsx": {
     id: "routes/_index";
@@ -32,10 +35,15 @@ type RouteFiles = {
     id: "routes/sources";
     page: "/sources";
   };
+  "routes/[manifest.json].tsx": {
+    id: "routes/[manifest.json]";
+    page: "/manifest.json";
+  };
 };
 
 type RouteModules = {
   "root": typeof import("./app/root.tsx");
   "routes/_index": typeof import("./app/routes/_index.tsx");
   "routes/sources": typeof import("./app/routes/sources.tsx");
+  "routes/[manifest.json]": typeof import("./app/routes/[manifest.json].tsx");
 };

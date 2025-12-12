@@ -66,8 +66,7 @@ export async function getScrapedData(): Promise<BtcToBrlRate | null> {
     console.log(latest)
   }
 
-  // retrieves the value between the word 'equals' and 'brazillian' // theres a typo there 🤷
-  const rate = latest.content.split('equals')[1].substring(0, 6)
+  const rate = latest.content;
 
   return {
     rate: Number(rate),
@@ -76,16 +75,20 @@ export async function getScrapedData(): Promise<BtcToBrlRate | null> {
 }
 
 export async function fetchLatest(): Promise<string> {
-  const webPage = await fetch(
-    'https://search.brave.com/search?q=btc+to+brl',
-  )
+  const webPage = await fetch('https://search.brave.com/search?q=btc+to+brl')
   const pageContent = await webPage.text()
   const $ = cheerio.load(pageContent)
-  const content = $('div.currency-info')
-    .text()
-    .trim()
-    .slice(0, 100)
-    .toLowerCase()
-  insertScrapedData(content)
-  return content
+  // Get entire HTML as a string
+  const pageText = $.html()
+  // Regex: capture digits between current_price: and the next comma
+  const match = pageText.match(/current_price\s*:\s*(\d+)\s*,/)
+  if (match) {
+    const currentPrice = String(match[1])
+    console.log('Current price:', currentPrice)
+    insertScrapedData(currentPrice)
+    return currentPrice
+  } else {
+    console.log('current_price not found')
+    return ''
+  }
 }

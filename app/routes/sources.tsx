@@ -41,10 +41,7 @@ export default function Page() {
                 <span>1 BRL = {(1 / data.rate).toFixed(11)} BTC</span>
               </p>
               <p className="font-light">
-                {data.lastUpdateStr.substring(
-                  0,
-                  data.lastUpdateStr.lastIndexOf('UTC') + 3,
-                )}
+                {new Date(data.lastUpdateStr).toLocaleString()}
               </p>
             </Link>
           )}
